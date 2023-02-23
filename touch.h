@@ -29,11 +29,15 @@
 
 /* uncomment for XPT2046 */
 #define TOUCH_XPT2046
+#if defined(ESP32)
 #define TOUCH_XPT2046_SCK 18
 #define TOUCH_XPT2046_MISO 19
 #define TOUCH_XPT2046_MOSI 23
 #define TOUCH_XPT2046_CS 14
 #define TOUCH_XPT2046_INT 27
+#elif defined(ESP8266)
+// don't know the pins, please tell me
+#endif
 #define TOUCH_XPT2046_ROTATION 1
 #define TOUCH_XPT2046_SAMPLES 50
 

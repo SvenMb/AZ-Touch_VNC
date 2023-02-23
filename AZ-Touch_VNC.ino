@@ -58,8 +58,13 @@ const char *VNC_PASSWORD = "12345678";
 // #define GFX_BL DF_GFX_BL // default backlight pin, you may replace DF_GFX_BL to actual backlight pin
 #define GFX_BL 15
 
+#if defined(ESP32)
+// this initialization is for ESP32 Devkit in AZ-Touch Mod
 Arduino_DataBus *bus = new Arduino_ESP32SPI(4 /* DC */, 5 /* CS */, 18 /* SCK */, 23 /* MOSI */, 19 /* MISO */);
 Arduino_GFX *gfx = new Arduino_ILI9341(bus, 22 /* RST */, 1 /* rotation */);
+#elif defined(ESP8266)
+// don't know the pins, please tell me
+#endif
 
 /* More dev device declaration: https://github.com/moononournation/Arduino_GFX/wiki/Dev-Device-Declaration */
 // #if defined(DISPLAY_DEV_KIT)
@@ -197,6 +202,7 @@ void setup(void)
 
 #ifdef GFX_BL
   pinMode(GFX_BL, OUTPUT);
+  // AZ-Touch Mod has inverted backlight, so LOW for  backlight on
   digitalWrite(GFX_BL, LOW);
 #endif
   TFTnoWifi();
